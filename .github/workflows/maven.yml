@@ -28,5 +28,10 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
+      env:
+        KEY: ${{ secrets.KEY }}
+        ALGO: ${{ secrets.ALGO }}
+        ISSUER: ${{ secrets.ISSUER }}
+        EXPIRES: ${{ secrets.EXPIRES }}
       run: mvn -B package --file pom.xml
 
