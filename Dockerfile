@@ -8,6 +8,12 @@ COPY ./ ./
 RUN mvn clean package
 # the second stage of our build will use open jdk 17 oracle
 FROM openjdk:17-oracle
+
+ARG KEY
+ARG ALGO
+ARG ISSUER
+ARG EXPIRES
+
 # copy only the artifacts we need from the first scau7y856tage and discard the rest
 COPY --from=MAVEN_BUILD /target/*.jar /back-end-api.jar
 # set the startup command to execute the jar
