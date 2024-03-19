@@ -30,6 +30,7 @@ public class SecurityConfig {
                 .authorizeRequests(auth -> auth
                         //Allow all request for home page with permit ALl
                         .requestMatchers("/").permitAll()
+                        .requestMatchers("/health-check").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/secured/admin").hasAuthority("SCOPE_ADMIN")
                         //AnyRequest is a catch-all for any request that doesn't match the above
