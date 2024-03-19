@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class HealthController {
 
+    @RequestMapping("/")
+    public ResponseEntity<?> zero() {
+        return ResponseEntity.ok().body("Ok");
+    }
+
     @RequestMapping("/health-check")
-    public ResponseEntity<?> home() {
+    public ResponseEntity<?> check() {
         return ResponseEntity.ok().body("Ok");
     }
 }
