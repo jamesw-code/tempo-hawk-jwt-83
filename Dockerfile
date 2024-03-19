@@ -9,7 +9,8 @@ ARG KEY
 ARG ALGO
 ARG ISSUER
 ARG EXPIRES
-RUN echo EXPIRES
+RUN echo "Test Variables"
+RUN echo $EXPIRES
 
 # package our application code
 RUN mvn clean package
