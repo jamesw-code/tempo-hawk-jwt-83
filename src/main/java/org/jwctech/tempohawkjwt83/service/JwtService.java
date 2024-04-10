@@ -1,4 +1,4 @@
-package org.jwctech.tempohawkjwt83;
+package org.jwctech.tempohawkjwt83.service;
 
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.JWSHeader;
@@ -6,6 +6,7 @@ import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 import lombok.RequiredArgsConstructor;
+import org.jwctech.tempohawkjwt83.AppJwtProperties;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;

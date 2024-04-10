@@ -1,4 +1,4 @@
-package org.jwctech.tempohawkjwt83;
+package org.jwctech.tempohawkjwt83.controller;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
