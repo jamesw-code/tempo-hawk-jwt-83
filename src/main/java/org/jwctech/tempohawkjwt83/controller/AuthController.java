@@ -1,7 +1,10 @@
 package org.jwctech.tempohawkjwt83.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.jwctech.tempohawkjwt83.payload.request.UserRequest;
 import org.jwctech.tempohawkjwt83.service.JwtService;
+import org.jwctech.tempohawkjwt83.service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -15,9 +18,11 @@ public class AuthController {
 
     private final JwtService jwtService;
 
+    private final UserService userService;
+
     @PostMapping (path = "/signup", consumes = APPLICATION_JSON_VALUE)
-    public String signUp() {
-        return "Signed Up!";
+    public ResponseEntity<?> signUp(@RequestBody UserRequest userRequest) {
+        return ResponseEntity.ok(userService.newUser(userRequest));
     }
 
     @PostMapping(path = "/signIn", consumes = APPLICATION_JSON_VALUE)
