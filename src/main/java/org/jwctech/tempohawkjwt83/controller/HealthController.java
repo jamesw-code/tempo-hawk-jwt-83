@@ -1,4 +1,4 @@
-package org.jwctech.tempohawkjwt83;
+package org.jwctech.tempohawkjwt83.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
