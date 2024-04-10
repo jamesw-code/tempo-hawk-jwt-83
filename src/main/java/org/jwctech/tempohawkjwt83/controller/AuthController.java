@@ -2,10 +2,7 @@ package org.jwctech.tempohawkjwt83.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.jwctech.tempohawkjwt83.service.JwtService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -38,7 +35,7 @@ public class AuthController {
         return "User removed!";
     }
 
-    @PostMapping(path = "/token", consumes = APPLICATION_JSON_VALUE)
+    @PutMapping(path = "/token", consumes = APPLICATION_JSON_VALUE)
     public String validateToken() {
         return "Valid token!";
     }
