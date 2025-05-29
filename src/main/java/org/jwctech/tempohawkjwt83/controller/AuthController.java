@@ -1,6 +1,7 @@
 package org.jwctech.tempohawkjwt83.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.jwctech.tempohawkjwt83.payload.request.SignInRequest;
 import org.jwctech.tempohawkjwt83.payload.request.UserRequest;
 import org.jwctech.tempohawkjwt83.service.JwtService;
 import org.jwctech.tempohawkjwt83.service.UserService;
@@ -25,9 +26,9 @@ public class AuthController {
         return ResponseEntity.ok(userService.newUser(userRequest));
     }
 
-    @PostMapping(path = "/signIn", consumes = APPLICATION_JSON_VALUE)
-    public String signIn() {
-        return "Signed In!";
+    @PostMapping(path = "/signin", consumes = APPLICATION_JSON_VALUE)
+    public String signIn(@RequestBody SignInRequest request) {
+        return userService.signIn(request.getUsername(), request.getPassword());
     }
 
     @PostMapping(path = "/signout", consumes = APPLICATION_JSON_VALUE)
