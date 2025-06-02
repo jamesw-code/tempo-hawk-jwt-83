@@ -17,6 +17,7 @@ public class UserService {
 
     private final JwtService jwtService;
     private final UserRepository userRepo;
+    private final GopherDbClient gopherDbClient;
     private final PasswordEncoder passwordEncoder;
 
     public  User newUser(UserRequest userRequest) {
@@ -30,7 +31,7 @@ public class UserService {
         return userRepo.save(user);
     }
 
-    public String signIn(String username, String rawPassword) {
+    public String logIn(String username, String rawPassword) {
         User user = userRepo
                 .findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -45,9 +46,13 @@ public class UserService {
         claims.put("email", user.getEmail());
         claims.put("fullName", user.getFullName());
         claims.put("scopes", user.getScopes());
-//        claims.put("role", user.getRoles());
-
 
         return jwtService.generateJWT(claims);
+    }
+
+    public void logOut(String token) {
+        String jwt = token.replace("Bearer ", "");
+        long exp = jwtService.getExpirationFromJWT(jwt);
+        gopherDbClient.set(jwt, String.valueOf(exp)); // Store in GopherDb
     }
 }

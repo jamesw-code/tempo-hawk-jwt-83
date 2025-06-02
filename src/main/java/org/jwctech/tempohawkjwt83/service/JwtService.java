@@ -53,4 +53,19 @@ public class JwtService {
         return builder.build();
     }
 
+    public long getExpirationFromJWT(String token) {
+        try {
+            var jwt = SignedJWT.parse(token);
+            var exp = jwt.getJWTClaimsSet().getExpirationTime();
+
+            if (exp == null) {
+                throw new IllegalArgumentException("Token does not contain an expiration");
+            }
+
+            return exp.toInstant().getEpochSecond(); // Unix timestamp
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to parse JWT", e);
+        }
+    }
+
 }
