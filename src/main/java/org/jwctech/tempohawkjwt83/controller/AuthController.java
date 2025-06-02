@@ -1,20 +1,12 @@
 package org.jwctech.tempohawkjwt83.controller;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jwctech.tempohawkjwt83.payload.request.SignInRequest;
 import org.jwctech.tempohawkjwt83.payload.request.UserRequest;
-import org.jwctech.tempohawkjwt83.service.GopherDbClient;
-import org.jwctech.tempohawkjwt83.service.JwtService;
 import org.jwctech.tempohawkjwt83.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
-
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Slf4j
 @RestController
