@@ -2,6 +2,7 @@ package org.jwctech.tempohawkjwt83.service;
 
 import lombok.RequiredArgsConstructor;
 import org.jwctech.tempohawkjwt83.model.User;
+import org.jwctech.tempohawkjwt83.payload.request.JwtPayload;
 import org.jwctech.tempohawkjwt83.payload.request.UserRequest;
 import org.jwctech.tempohawkjwt83.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -40,14 +41,14 @@ public class UserService {
             throw new RuntimeException("Invalid credentials");
         }
 
-        // Build claims
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("username", user.getUsername());
-        claims.put("email", user.getEmail());
-        claims.put("fullName", user.getFullName());
-        claims.put("scopes", user.getScopes());
+        JwtPayload payload = new JwtPayload(
+                user.getUsername(),
+                user.getEmail(),
+                user.getFullName(),
+                user.getScopes()
+        );
 
-        return jwtService.generateJWT(claims);
+        return jwtService.generateJWT(payload);
     }
 
     public void logOut(String token) {

@@ -12,6 +12,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.crypto.SecretKey;
 import java.time.Duration;
+import java.util.Base64;
 
 @Getter
 @Setter
@@ -37,7 +38,13 @@ public class AppJwtProperties {
     }
 
     public void setKey(String key) {
-        var jwk = new OctetSequenceKey.Builder(key.getBytes())
+        byte[] decodedKey = Base64.getDecoder().decode(key);
+
+        if (decodedKey.length < 32) {
+            throw new IllegalArgumentException("JWT secret must be at least 256 bits (32 bytes) long.");
+        }
+
+        var jwk = new OctetSequenceKey.Builder(decodedKey)
                 .algorithm(algorithm)
                 .build();
 
