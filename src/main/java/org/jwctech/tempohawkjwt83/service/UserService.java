@@ -3,13 +3,11 @@ package org.jwctech.tempohawkjwt83.service;
 import lombok.RequiredArgsConstructor;
 import org.jwctech.tempohawkjwt83.model.User;
 import org.jwctech.tempohawkjwt83.payload.request.JwtPayload;
-import org.jwctech.tempohawkjwt83.payload.request.UserRequest;
+import org.jwctech.tempohawkjwt83.payload.request.SignUpRequest;
 import org.jwctech.tempohawkjwt83.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 @Service
@@ -21,15 +19,15 @@ public class UserService {
     private final GopherDbClient gopherDbClient;
     private final PasswordEncoder passwordEncoder;
 
-    public  User newUser(UserRequest userRequest) {
+    public  void newUser(SignUpRequest signUpRequest) {
         User user = new User();
-        user.setEmail(userRequest.getEmail());
-        user.setUsername(userRequest.getUsername());
-        user.setFullName(userRequest.getFullName());
-        user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+        user.setEmail(signUpRequest.getEmail());
+        user.setUsername(signUpRequest.getUsername());
+        user.setFullName(signUpRequest.getFullName());
+        user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
         user.setScopes(Set.of("GUEST"));
 
-        return userRepo.save(user);
+        userRepo.save(user);
     }
 
     public String logIn(String username, String rawPassword) {
