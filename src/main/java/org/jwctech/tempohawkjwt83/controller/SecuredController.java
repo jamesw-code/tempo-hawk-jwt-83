@@ -13,7 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/secured")
 public class SecuredController {
 
-    @GetMapping
+    @GetMapping()
+    public String any(Authentication authentication) {
+        return "Hello, %s. You have next permissions: %s"
+                .formatted(getUsername(authentication), authentication.getAuthorities());
+    }
+
+    @GetMapping("/guest")
     @PreAuthorize("hasAuthority('SCOPE_GUEST')")
     public String guest(Authentication authentication) {
         return "Hello, %s. You have next permissions: %s"
